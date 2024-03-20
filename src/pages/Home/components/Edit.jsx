@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { v4 } from "uuid";
 
-const Edit = ({ add }) => {
+const Edit = ({ add ,submittingStatus}) => {
   //初次渲染不會有add 待onClick事件後觸發addItem function的add ->Edit 加上add([1,2,3])
 
   const [note, setNote] = useState("");
@@ -23,6 +23,7 @@ const Edit = ({ add }) => {
   console.log(note, date, time);
 
   function addItem() {
+    submittingStatus.current = true
     //下面onClick 呼叫 function
     add(function (prevData) {
       return [
@@ -31,7 +32,8 @@ const Edit = ({ add }) => {
           note,
           date,
           time,
-        },...prevData,
+        },
+        ...prevData,
       ];
     });
   }
